@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Richiedi un Preventivo</title>
-  <link rel="stylesheet" href="Style/thestyle.css">
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <link rel="stylesheet" href="Style/thestyle.css">  
   <style> 
     .header, .footer {
       opacity: 1;
@@ -112,63 +113,62 @@
     <p id="messaggio-conferma" class="hidden">Grazie per la sua richiesta! Le risponderemo al più presto. 😊</p>
   </main>
 
-  <!-- Collega il file JavaScript esterno -->
-  <script> 
+ <script>
   // Calcolo delle notti
-document.getElementById('checkin').addEventListener('change', calcolaNotti);
-document.getElementById('checkout').addEventListener('change', calcolaNotti);
+  document.getElementById('checkin').addEventListener('change', calcolaNotti);
+  document.getElementById('checkout').addEventListener('change', calcolaNotti);
 
-function calcolaNotti() {
-    var checkin = document.getElementById('checkin').value;
-    var checkout = document.getElementById('checkout').value;
+  function calcolaNotti() {
+      var checkin = document.getElementById('checkin').value;
+      var checkout = document.getElementById('checkout').value;
 
-    if (checkin && checkout) {
-        var diffTime = new Date(checkout) - new Date(checkin);
-        var diffDays = diffTime / (1000 * 3600 * 24);
-        document.getElementById('totale-notti').innerText = diffDays + " notti";
-    }
-}
+      if (checkin && checkout) {
+          var diffTime = new Date(checkout) - new Date(checkin);
+          var diffDays = diffTime / (1000 * 3600 * 24);
+          document.getElementById('totale-notti').innerText = diffDays + " notti";
+      }
+  }
 
-// Invia il modulo tramite emailJS
+  // Invia il modulo tramite emailJS
+  document.getElementById('preventivoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-document.getElementById('preventivoForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+      // Recupero i dati dal modulo
+      var nome = document.getElementById('nome').value;
+      var email = document.getElementById('email').value;
+      var telefono = document.getElementById('telefono').value;
+      var struttura = document.getElementById('struttura').value;
+      var checkin = document.getElementById('checkin').value;
+      var checkout = document.getElementById('checkout').value;
+      var adulti = document.getElementById('adulti').value;
+      var bambini = document.getElementById('bambini').value;
+      var animali = document.getElementById('animali').value;
+      var info = document.getElementById('info').value;
 
-    // Recupero i dati dal modulo
-    var nome = document.getElementById('nome').value;
-    var email = document.getElementById('email').value;
-    var telefono = document.getElementById('telefono').value;
-    var struttura = document.getElementById('struttura').value;
-    var checkin = document.getElementById('checkin').value;
-    var checkout = document.getElementById('checkout').value;
-    var adulti = document.getElementById('adulti').value;
-    var bambini = document.getElementById('bambini').value;
-    var animali = document.getElementById('animali').value;
-    var info = document.getElementById('info').value;
+      // Inizializza EmailJS con il tuo user_id
+      emailjs.init("pd5BHjNg_hK-eDQGQ");  // Usa il tuo user_id qui
 
-    // Utilizzo emailJS per inviare la richiesta
-    emailjs.init("pd5BHjNg_hK-eDQGQ");  // Usa il tuo user_id qui
+      // Invia la richiesta al template configurato su EmailJS
+      emailjs.send('service_7txlbbc', 'template_0fnlqhi', {
+          nome: nome,
+          email: email,
+          telefono: telefono,
+          struttura: struttura,
+          checkin: checkin,
+          checkout: checkout,
+          adulti: adulti,
+          bambini: bambini,
+          animali: animali,
+          info: info
+      }).then(function(response) {
+          // Mostra il messaggio di conferma
+          document.getElementById('messaggio-conferma').classList.remove('hidden');
+      }, function(error) {
+          alert('Errore nell\'invio del modulo: ' + error);
+      });
+  });
+</script>
 
-    emailjs.send('service_7txlbbc', 'template_0fnlqhi', {
-        nome: nome,
-        email: email,
-        telefono: telefono,
-        struttura: struttura,
-        checkin: checkin,
-        checkout: checkout,
-        adulti: adulti,
-        bambini: bambini,
-        animali: animali,
-        info: info
-    }).then(function(response) {
-        // Mostra il messaggio di conferma
-        document.getElementById('messaggio-conferma').classList.remove('hidden');
-    }, function(error) {
-        alert('Errore nell\'invio del modulo: ' + error);
-    });
-});
-
-  </script>
   
   <footer class="footer">
     &copy; 2025 Roberto Nonnis - Email: nonnonsky@tiscali.it - Cell: 3479181895 - CIN:IT111010C2000Q4526
