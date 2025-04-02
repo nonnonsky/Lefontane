@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Richiedi un Preventivo</title>
+  <link rel="stylesheet" href="Style/thestyle.css">
+<style> 
+ .header, .footer {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+</style>
+<body>
+  <div class="content">
+    <header class="header">
+<img src="./media/logoRN.png" alt="Logo" class="small-logo" id="smallLogo">
+      <ul class="menu">
+        <li><a href="#">Home</a></li>
+        <li>
+         <a href="#">Strutture</a>
+          <ul class="dropdown">
+            <li><a href="cadamarta.html">Ca da Marta</a></li>
+            <li><a href="gardenhouse.html">Garden House</a></li>
+          </ul>
+        </li>
+        <li><a href="mappa.html">Mappa</a></li>                 
+        <li><a href="prodotto.html">Prodotti</a></li>
+        <li><a href="#">Preventivo</a></li>              
+        <li><a href="contatto.html">Contatti</a></li>  
+    </header>
+  </div>
+<main>
+    <h1>Richiedi un preventivo</h1>
+    <form class="preventivo-form" id="preventivoForm">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="telefono">Telefono:</label>
+            <input type="tel" id="telefono" required>
+        </div>
+
+        <div class="form-group">
+            <label for="struttura">Scegli la struttura:</label>
+            <select id="struttura" required>
+                <option value="" disabled selected>Seleziona una struttura</option>
+                <option value="ca_da_marta">Cà da Marta</option>
+                <option value="garden_house">Garden House</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="checkin">Data Check-in:</label>
+            <input type="date" id="checkin" required>
+        </div>
+
+        <div class="form-group">
+            <label for="checkout">Data Check-out:</label>
+            <input type="date" id="checkout" required>
+        </div>
+
+        <div class="form-group">
+            <label>Totale notti:</label>
+            <p id="totale-notti">0 notti</p>
+        </div>
+
+        <div class="form-group">
+            <label for="adulti">Numero di adulti:</label>
+            <input type="number" id="adulti" min="1" value="1" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bambini">Numero di bambini: (0-12 anni)</label>
+            <input type="number" id="bambini" min="0" value="0">
+        </div>
+
+        <div class="form-group">
+            <label for="animali">Animali domestici:</label>
+            <select id="animali" required>
+                <option value="no" selected>No</option>
+                <option value="si">Sì</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="info">Richiedi maggiori informazioni:</label>
+            <textarea id="info" rows="4" required></textarea>
+        </div>
+
+        <div class="form-group privacy">
+            <label>
+                <input type="checkbox" required> Accetto la Privacy Policy
+            </label>
+        </div>
+
+        <button type="submit" class="submit-btn">Invia</button>
+    </form>
+ <p id="messaggio-conferma" class="hidden">Grazie per la sua richiesta! Siamo felici di aiutarla a pianificare il suo soggiorno. Le risponderemo al più presto con tutti i dettagli. A presto! 😊</p>
+</main>
+
+<script>
+    function calcolaNotti() {
+        const checkin = document.getElementById("checkin").value;
+        const checkout = document.getElementById("checkout").value;
+        const totaleNotti = document.getElementById("totale-notti");
+
+        if (checkin && checkout) {
+            const inDate = new Date(checkin);
+            const outDate = new Date(checkout);
+            const diffTime = outDate - inDate;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            totaleNotti.textContent = diffDays > 0 ? `${diffDays} notti` : "Seleziona date valide";
+        } else {
+            totaleNotti.textContent = "0 notti";
+        }
+    }
+
+    document.getElementById("checkin").addEventListener("change", calcolaNotti);
+    document.getElementById("checkout").addEventListener("change", calcolaNotti);
+
+    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        // Nasconde il form
+        document.getElementById("preventivoForm").style.display = "none";
+        
+        // Mostra il messaggio di conferma
+        document.getElementById("messaggio-conferma").classList.remove("hidden");
+    });
+ 
+    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Previene il comportamento predefinito del form
+    
+        // Mostra il messaggio di conferma
+        document.getElementById("messaggio-conferma").style.display = "block";
+    
+        // Puoi anche resettare il form se necessario
+        this.reset();
+    });
+    </script>
+
+  <footer class="footer">
+    &copy; 2025 Roberto Nonnis - Email: nonnonsky@tiscali.it - Cell: 3479181895
+  </footer>
+
+</body>
+</html>
