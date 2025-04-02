@@ -107,37 +107,7 @@
 </main>
 
 <script src="js/sendemail.js"></script>
-<script>
-    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
-        event.preventDefault();
-
-        let nome = document.getElementById("nome").value;
-        let email = document.getElementById("email").value;
-        let telefono = document.getElementById("telefono").value;
-        let struttura = document.getElementById("struttura").value;
-        let checkin = document.getElementById("checkin").value;
-        let checkout = document.getElementById("checkout").value;
-        let adulti = document.getElementById("adulti").value;
-        let bambini = document.getElementById("bambini").value;
-        let animali = document.getElementById("animali").value;
-        let info = document.getElementById("info").value;
-
-        let message = `*Richiesta Preventivo*%0A
-        *Nome:* ${nome}%0A
-        *Email:* ${email}%0A
-        *Telefono:* ${telefono}%0A
-        *Struttura:* ${struttura}%0A
-        *Check-in:* ${checkin}%0A
-        *Check-out:* ${checkout}%0A
-        *Adulti:* ${adulti}%0A
-        *Bambini:* ${bambini}%0A
-        *Animali:* ${animali}%0A
-        *Info:* ${info}`;
-
-        let whatsappLink = `https://wa.me/393479181895?text=${message}`;
-        window.open(whatsappLink, "_blank");
-    });
-</script>
+ 
 
     <footer class="footer">
     &copy; 2025 Roberto Nonnis - Email: nonnonsky@tiscali.it - Cell: 3479181895 - CIN:IT111010C2000Q4526
