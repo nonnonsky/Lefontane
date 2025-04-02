@@ -107,45 +107,38 @@
 </main>
 
 <script>
-    function calcolaNotti() {
-        const checkin = document.getElementById("checkin").value;
-        const checkout = document.getElementById("checkout").value;
-        const totaleNotti = document.getElementById("totale-notti");
-
-        if (checkin && checkout) {
-            const inDate = new Date(checkin);
-            const outDate = new Date(checkout);
-            const diffTime = outDate - inDate;
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-            totaleNotti.textContent = diffDays > 0 ? `${diffDays} notti` : "Seleziona date valide";
-        } else {
-            totaleNotti.textContent = "0 notti";
-        }
-    }
-
-    document.getElementById("checkin").addEventListener("change", calcolaNotti);
-    document.getElementById("checkout").addEventListener("change", calcolaNotti);
-
+<script>
     document.getElementById("preventivoForm").addEventListener("submit", function(event) {
         event.preventDefault();
-        
-        // Nasconde il form
-        document.getElementById("preventivoForm").style.display = "none";
-        
-        // Mostra il messaggio di conferma
-        document.getElementById("messaggio-conferma").classList.remove("hidden");
+
+        let nome = document.getElementById("nome").value;
+        let email = document.getElementById("email").value;
+        let telefono = document.getElementById("telefono").value;
+        let struttura = document.getElementById("struttura").value;
+        let checkin = document.getElementById("checkin").value;
+        let checkout = document.getElementById("checkout").value;
+        let adulti = document.getElementById("adulti").value;
+        let bambini = document.getElementById("bambini").value;
+        let animali = document.getElementById("animali").value;
+        let info = document.getElementById("info").value;
+
+        let message = `*Richiesta Preventivo*%0A
+        *Nome:* ${nome}%0A
+        *Email:* ${email}%0A
+        *Telefono:* ${telefono}%0A
+        *Struttura:* ${struttura}%0A
+        *Check-in:* ${checkin}%0A
+        *Check-out:* ${checkout}%0A
+        *Adulti:* ${adulti}%0A
+        *Bambini:* ${bambini}%0A
+        *Animali:* ${animali}%0A
+        *Info:* ${info}`;
+
+        let whatsappLink = `https://wa.me/393479181895?text=${message}`;
+        window.open(whatsappLink, "_blank");
     });
- 
-    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Previene il comportamento predefinito del form
-    
-        // Mostra il messaggio di conferma
-        document.getElementById("messaggio-conferma").style.display = "block";
-    
-        // Puoi anche resettare il form se necessario
-        this.reset();
-    });
+</script>
+
     </script>
 
   <footer class="footer">
