@@ -148,7 +148,7 @@
       // Inizializza EmailJS con il tuo user_id
       emailjs.init("pd5BHjNg_hK-eDQGQ");  // Usa il tuo user_id qui
 
-    emailjs.send('service_7txlbbc', 'template_0fnlqhi', {
+ emailjs.send('service_7txlbbc', 'template_0fnlqhi', {
   nome: nome,
   email: email,
   telefono: telefono,
@@ -163,9 +163,8 @@
   // Mostra il messaggio di conferma
   document.getElementById('messaggio-conferma').classList.remove('hidden');
 }, function(error) {
-  // Mostra l'errore dettagliato nella console per il debug
-  console.error("Errore dettagliato:", error);
-  alert('Errore nell\'invio del modulo: ' + error.text);
+  console.error("Errore EmailJS:", error);
+  alert('Errore nell\'invio del modulo: ' + (error.text || error));
 });
 
 </script>
