@@ -1,3 +1,6 @@
+emailjs.init("event_6xqMSzfhlUvVg9Hd93jsm8pc");  // Sostituisci "your_user_id" con il tuo ID utente di EmailJS
+
+
 // Calcolo delle notti
 document.getElementById('checkin').addEventListener('change', calcolaNotti);
 document.getElementById('checkout').addEventListener('change', calcolaNotti);
