@@ -14,10 +14,12 @@ document.getElementById("preventivoForm").addEventListener("submit", function(ev
         info: document.getElementById("info").value
     };
 
-    emailjs.send("service_7txlbbc", "Template ID:template_0fnlqhi", formData)
+    emailjs.send("service_7txlbbc", "template_0fnlqhi", formData)
     .then(function(response) {
         alert("Email inviata con successo!");
+        console.log("SUCCESSO!", response);
     }, function(error) {
         alert("Errore nell'invio dell'email: " + error.text);
+        console.log("ERRORE!", error);
     });
 });
