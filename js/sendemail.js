@@ -1,6 +1,3 @@
-emailjs.init("service_7txlbbc");  // Sostituisci "your_user_id" con il tuo ID utente di EmailJS
-
-
 // Calcolo delle notti
 document.getElementById('checkin').addEventListener('change', calcolaNotti);
 document.getElementById('checkout').addEventListener('change', calcolaNotti);
@@ -17,6 +14,7 @@ function calcolaNotti() {
 }
 
 // Invia il modulo tramite emailJS
+
 document.getElementById('preventivoForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -33,6 +31,8 @@ document.getElementById('preventivoForm').addEventListener('submit', function(e)
     var info = document.getElementById('info').value;
 
     // Utilizzo emailJS per inviare la richiesta
+    emailjs.init("pd5BHjNg_hK-eDQGQ");  // Usa il tuo user_id qui
+
     emailjs.send('service_7txlbbc', 'template_0fnlqhi', {
         nome: nome,
         email: email,
