@@ -1,36 +1,53 @@
- document.getElementById("checkin").addEventListener("change", calcolaNotti);
-    document.getElementById("checkout").addEventListener("change", calcolaNotti);
+// Calcolo delle notti
+document.getElementById('checkin').addEventListener('change', calcolaNotti);
+document.getElementById('checkout').addEventListener('change', calcolaNotti);
 
-    function calcolaNotti() {
-      let checkin = new Date(document.getElementById("checkin").value);
-      let checkout = new Date(document.getElementById("checkout").value);
-      if (checkout > checkin) {
-        let diff = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
-        document.getElementById("totale-notti").textContent = diff + " notti";
-      } else {
-        document.getElementById("totale-notti").textContent = "0 notti";
-      }
+function calcolaNotti() {
+    var checkin = document.getElementById('checkin').value;
+    var checkout = document.getElementById('checkout').value;
+
+    if (checkin && checkout) {
+        var diffTime = new Date(checkout) - new Date(checkin);
+        var diffDays = diffTime / (1000 * 3600 * 24);
+        document.getElementById('totale-notti').innerText = diffDays + " notti";
     }
+}
 
-    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
-      event.preventDefault();
-      let formData = {
-        nome: document.getElementById("nome").value,
-        email: document.getElementById("email").value,
-        telefono: document.getElementById("telefono").value,
-        struttura: document.getElementById("struttura").value,
-        checkin: document.getElementById("checkin").value,
-        checkout: document.getElementById("checkout").value,
-        adulti: document.getElementById("adulti").value,
-        bambini: document.getElementById("bambini").value,
-        animali: document.getElementById("animali").value,
-        info: document.getElementById("info").value
-      };
-      
-      emailjs.send("service_7txlbbc", "template_0fnlqhi", formData)
-      .then(function(response) {
-        document.getElementById("messaggio-conferma").classList.remove("hidden");
-      }, function(error) {
-        alert("Errore nell'invio dell'email");
-      });
+// Invia il modulo tramite emailJS
+document.getElementById('preventivoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Recupero i dati dal modulo
+    var nome = document.getElementById('nome').value;
+    var email = document.getElementById('email').value;
+    var telefono = document.getElementById('telefono').value;
+    var struttura = document.getElementById('struttura').value;
+    var checkin = document.getElementById('checkin').value;
+    var checkout = document.getElementById('checkout').value;
+    var adulti = document.getElementById('adulti').value;
+    var bambini = document.getElementById('bambini').value;
+    var animali = document.getElementById('animali').value;
+    var info = document.getElementById('info').value;
+
+    // Utilizzo emailJS per inviare la richiesta
+    emailjs.send('service_7txlbbc', 'template_0fnlqhi', {
+        nome: nome,
+        email: email,
+        telefono: telefono,
+        struttura: struttura,
+        checkin: checkin,
+        checkout: checkout,
+        adulti: adulti,
+        bambini: bambini,
+        animali: animali,
+        info: info
+    }).then(function(response) {
+        // Mostra il messaggio di conferma
+        document.getElementById('messaggio-conferma').classList.remove('hidden');
+    }, function(error) {
+        alert('Errore nell\'invio del modulo: ' + error);
     });
+});
+
+      
+ 
