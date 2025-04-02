@@ -5,20 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Richiedi un Preventivo</title>
   <link rel="stylesheet" href="Style/thestyle.css">
-<style> 
- .header, .footer {
-  opacity: 1;
-  transition: opacity 1s ease-in-out;
-}
-</style>
+  <style> 
+    .header, .footer {
+      opacity: 1;
+      transition: opacity 1s ease-in-out;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
 <body>
   <div class="content">
     <header class="header">
-<img src="Media/logoRN.png" alt="Logo" class="small-logo" id="smallLogo">
+      <img src="Media/logoRN.png" alt="Logo" class="small-logo" id="smallLogo">
       <ul class="menu">
         <li><a href="index.html">Home</a></li>
         <li>
-         <a href="#">Strutture</a>
+          <a href="#">Strutture</a>
           <ul class="dropdown">
             <li><a href="cadamarta.html">Ca da Marta</a></li>
             <li><a href="gardenhouse.html">Garden House</a></li>
@@ -28,90 +32,127 @@
         <li><a href="prodotto.html">Prodotti</a></li>
         <li><a href="#">Preventivo</a></li>              
         <li><a href="contatto.html">Contatti</a></li>  
+      </ul>
     </header>
   </div>
-<main>
+
+  <main>
     <h1>Richiedi un preventivo</h1>
     <form class="preventivo-form" id="preventivoForm">
-        <div class="form-group">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" required>
-        </div>
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required>
+      </div>
 
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" required>
-        </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+      </div>
 
-        <div class="form-group">
-            <label for="telefono">Telefono:</label>
-            <input type="tel" id="telefono" required>
-        </div>
+      <div class="form-group">
+        <label for="telefono">Telefono:</label>
+        <input type="tel" id="telefono" required>
+      </div>
 
-        <div class="form-group">
-            <label for="struttura">Scegli la struttura:</label>
-            <select id="struttura" required>
-                <option value="" disabled selected>Seleziona una struttura</option>
-                <option value="ca_da_marta">Cà da Marta</option>
-                <option value="garden_house">Garden House</option>
-            </select>
-        </div>
+      <div class="form-group">
+        <label for="struttura">Scegli la struttura:</label>
+        <select id="struttura" required>
+          <option value="" disabled selected>Seleziona una struttura</option>
+          <option value="ca_da_marta">Cà da Marta</option>
+          <option value="garden_house">Garden House</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-            <label for="checkin">Data Check-in:</label>
-            <input type="date" id="checkin" required>
-        </div>
+      <div class="form-group">
+        <label for="checkin">Data Check-in:</label>
+        <input type="date" id="checkin" required>
+      </div>
 
-        <div class="form-group">
-            <label for="checkout">Data Check-out:</label>
-            <input type="date" id="checkout" required>
-        </div>
+      <div class="form-group">
+        <label for="checkout">Data Check-out:</label>
+        <input type="date" id="checkout" required>
+      </div>
 
-        <div class="form-group">
-            <label>Totale notti:</label>
-            <p id="totale-notti">0 notti</p>
-        </div>
+      <div class="form-group">
+        <label>Totale notti:</label>
+        <p id="totale-notti">0 notti</p>
+      </div>
 
-        <div class="form-group">
-            <label for="adulti">Numero di adulti:</label>
-            <input type="number" id="adulti" min="1" value="1" required>
-        </div>
+      <div class="form-group">
+        <label for="adulti">Numero di adulti:</label>
+        <input type="number" id="adulti" min="1" value="1" required>
+      </div>
 
-        <div class="form-group">
-            <label for="bambini">Numero di bambini: (0-12 anni)</label>
-            <input type="number" id="bambini" min="0" value="0">
-        </div>
+      <div class="form-group">
+        <label for="bambini">Numero di bambini: (0-12 anni)</label>
+        <input type="number" id="bambini" min="0" value="0">
+      </div>
 
-        <div class="form-group">
-            <label for="animali">Animali domestici:</label>
-            <select id="animali" required>
-                <option value="no" selected>No</option>
-                <option value="si">Sì</option>
-            </select>
-        </div>
+      <div class="form-group">
+        <label for="animali">Animali domestici:</label>
+        <select id="animali" required>
+          <option value="no" selected>No</option>
+          <option value="si">Sì</option>
+        </select>
+      </div>
 
-        <div class="form-group">
-            <label for="info">Richiedi maggiori informazioni:</label>
-            <textarea id="info" rows="4" required></textarea>
-        </div>
+      <div class="form-group">
+        <label for="info">Richiedi maggiori informazioni:</label>
+        <textarea id="info" rows="4" required></textarea>
+      </div>
 
-        <div class="form-group privacy">
-            <label>
-                <input type="checkbox" required> Accetto la Privacy Policy
-            </label>
-        </div>
+      <div class="form-group privacy">
+        <label>
+          <input type="checkbox" required> Accetto la Privacy Policy
+        </label>
+      </div>
 
-        <button type="submit" class="submit-btn">Invia</button>
+      <button type="submit" class="submit-btn">Invia</button>
     </form>
- <p id="messaggio-conferma" class="hidden">Grazie per la sua richiesta! Siamo felici di aiutarla a pianificare il suo soggiorno. Le risponderemo al più presto con tutti i dettagli. A presto! 😊</p>
-</main>
+    <p id="messaggio-conferma" class="hidden">Grazie per la sua richiesta! Le risponderemo al più presto. 😊</p>
+  </main>
 
-<script src="js/sendemail.js"></script>
- 
+  <script>
+    document.getElementById("checkin").addEventListener("change", calcolaNotti);
+    document.getElementById("checkout").addEventListener("change", calcolaNotti);
 
-    <footer class="footer">
+    function calcolaNotti() {
+      let checkin = new Date(document.getElementById("checkin").value);
+      let checkout = new Date(document.getElementById("checkout").value);
+      if (checkout > checkin) {
+        let diff = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+        document.getElementById("totale-notti").textContent = diff + " notti";
+      } else {
+        document.getElementById("totale-notti").textContent = "0 notti";
+      }
+    }
+
+    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let formData = {
+        nome: document.getElementById("nome").value,
+        email: document.getElementById("email").value,
+        telefono: document.getElementById("telefono").value,
+        struttura: document.getElementById("struttura").value,
+        checkin: document.getElementById("checkin").value,
+        checkout: document.getElementById("checkout").value,
+        adulti: document.getElementById("adulti").value,
+        bambini: document.getElementById("bambini").value,
+        animali: document.getElementById("animali").value,
+        info: document.getElementById("info").value
+      };
+      
+      emailjs.send("service_7txlbbc", "template_0fnlqhi", formData)
+      .then(function(response) {
+        document.getElementById("messaggio-conferma").classList.remove("hidden");
+      }, function(error) {
+        alert("Errore nell'invio dell'email");
+      });
+    });
+  </script>
+  
+  <footer class="footer">
     &copy; 2025 Roberto Nonnis - Email: nonnonsky@tiscali.it - Cell: 3479181895 - CIN:IT111010C2000Q4526
   </footer>
-
 </body>
 </html>
