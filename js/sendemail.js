@@ -1,4 +1,4 @@
-emailjs.init("event_6xqMSzfhlUvVg9Hd93jsm8pc");  // Sostituisci "your_user_id" con il tuo ID utente di EmailJS
+emailjs.init("service_7txlbbc");  // Sostituisci "your_user_id" con il tuo ID utente di EmailJS
 
 
 // Calcolo delle notti
