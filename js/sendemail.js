@@ -1,7 +1,20 @@
-document.getElementById("preventivoForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+ document.getElementById("checkin").addEventListener("change", calcolaNotti);
+    document.getElementById("checkout").addEventListener("change", calcolaNotti);
 
-    let formData = {
+    function calcolaNotti() {
+      let checkin = new Date(document.getElementById("checkin").value);
+      let checkout = new Date(document.getElementById("checkout").value);
+      if (checkout > checkin) {
+        let diff = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+        document.getElementById("totale-notti").textContent = diff + " notti";
+      } else {
+        document.getElementById("totale-notti").textContent = "0 notti";
+      }
+    }
+
+    document.getElementById("preventivoForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      let formData = {
         nome: document.getElementById("nome").value,
         email: document.getElementById("email").value,
         telefono: document.getElementById("telefono").value,
@@ -12,14 +25,12 @@ document.getElementById("preventivoForm").addEventListener("submit", function(ev
         bambini: document.getElementById("bambini").value,
         animali: document.getElementById("animali").value,
         info: document.getElementById("info").value
-    };
-
-    emailjs.send("service_7txlbbc", "template_0fnlqhi", formData)
-    .then(function(response) {
-        console.log("Email inviata con successo!", response);
+      };
+      
+      emailjs.send("service_7txlbbc", "template_0fnlqhi", formData)
+      .then(function(response) {
         document.getElementById("messaggio-conferma").classList.remove("hidden");
-    }, function(error) {
-        console.error("Errore nell'invio dell'email:", error);
-        alert("Errore nell'invio dell'email: " + error.text);
+      }, function(error) {
+        alert("Errore nell'invio dell'email");
+      });
     });
-});
