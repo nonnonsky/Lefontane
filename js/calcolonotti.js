@@ -1,3 +1,8 @@
+ //Calcolo delle notti
+  document.getElementById('checkin').addEventListener('change', calcolaNotti);
+  document.getElementById('checkout').addEventListener('change', calcolaNotti);
+
+
 function calcolaNotti() {
     var checkin = document.getElementById('checkin').value;
     var checkout = document.getElementById('checkout').value;
