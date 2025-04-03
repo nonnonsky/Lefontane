@@ -17,26 +17,16 @@
   </style>
 </head>
 <body>
-  <div class="content">
-    <header class="header">
-      <img src="Media/logoRN.png" alt="Logo" class="small-logo" id="smallLogo">
-      <ul class="menu">
-        <li><a href="index.html">Home</a></li>
-        <li>
-          <a href="#">Strutture</a>
-          <ul class="dropdown">
-            <li><a href="cadamarta.html">Ca da Marta</a></li>
-            <li><a href="gardenhouse.html">Garden House</a></li>
-          </ul>
-        </li>
-        <li><a href="mappa.html">Mappa</a></li>                 
-        <li><a href="prodotto.html">Prodotti</a></li>
-        <li><a href="#">Preventivo</a></li>              
-        <li><a href="contatto.html">Contatti</a></li>  
-      </ul>
-    </header>
-  </div>
+    <div id="navbar"></div>
 
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('navbar').innerHTML = data)
+      .catch(error => console.error('Errore nel caricamento della barra di navigazione:', error));
+  </script>
+
+  
   <main>
     <h1>Richiedi un preventivo2</h1>
     <form class="preventivo-form" id="preventivoForm">
