@@ -4,13 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Richiedi un Preventivo2</title>
-  <script type="text/javascript">
-  (function(){
-    emailjs.init("pd5BHjNg_hK-eDQGQ"); // Inizializza con il tuo user_id
-  })();
-</script>
-
-  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <link rel="stylesheet" href="Style/thestyle.css">  
   <style> 
     .header, .footer {
@@ -112,7 +105,7 @@
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    // Inizializza EmailJS con il Public Key
+    // Inizializza EmailJS dopo che la libreria è stata caricata
     emailjs.init("pd5BHjNg_hK-eDQGQ");
 
     document.getElementById('preventivoForm').addEventListener('submit', function(e) {
@@ -126,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function() {
             struttura: document.getElementById('struttura').value,
             checkin: document.getElementById('checkin').value,
             checkout: document.getElementById('checkout').value, 
-            notti:notti,
+            notti: notti,
             adulti: document.getElementById('adulti').value,
             bambini: document.getElementById('bambini').value,
             animali: document.getElementById('animali').value,
@@ -146,6 +139,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
 
   <footer class="footer">
     &copy; 2025 Roberto Nonnis - Email: nonnonsky@tiscali.it - Cell: 3479181895 - CIN:IT111010C2000Q4526
