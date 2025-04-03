@@ -1,18 +1,3 @@
-// Calcolo delle notti
-document.getElementById('checkin').addEventListener('change', calcolaNotti);
-document.getElementById('checkout').addEventListener('change', calcolaNotti);
-
-function calcolaNotti() {
-    var checkin = document.getElementById('checkin').value;
-    var checkout = document.getElementById('checkout').value;
-
-    if (checkin && checkout) {
-        var diffTime = new Date(checkout) - new Date(checkin);
-        var diffDays = diffTime / (1000 * 3600 * 24);
-        document.getElementById('totale-notti').innerText = diffDays + " notti";
-    }
-}
-
 // Invia il modulo tramite emailJS
 
 document.getElementById('preventivoForm').addEventListener('submit', function(e) {
