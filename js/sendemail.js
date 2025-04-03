@@ -41,8 +41,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Mostra il messaggio di conferma e nasconde il form
             messaggioConferma.textContent = "Grazie per la sua richiesta! Le risponderemo al più presto. 😊";
-            document.getElementById('preventivoForm').reset(); // Resetta il form
-            document.getElementById('preventivoForm').style.display = 'none'; // Nasconde il form
+ // Nasconde tutti gli elementi del form tranne il messaggio
+            document.querySelectorAll('.preventivo-form .form-group, .submit-btn').forEach(el => {
+                el.style.display = 'none';
+            });
+            
         })
         .catch(function(error) {
             console.error("Errore EmailJS:", error);
