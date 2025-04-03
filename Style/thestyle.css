@@ -62,6 +62,7 @@ h2 {
   position: relative;
   overflow: hidden;
   transition: opacity 1.5s ease-in-out;
+ animation: lightMove 5.5s linear forwards;
 }
 
 .logo {
