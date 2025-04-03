@@ -46,26 +46,14 @@
     <img src="Media/logoRN.png" alt="Logo Roberto Nonnis" class="logo" id="logo">
   </div>
  
-  <div class="content" id="content">
-    <header class="header">
-      <img src="Media/logoRN.png" alt="Logo Roberto Nonnis" class="small-logo" id="smallLogo">
-      <nav>
-        <ul class="menu">
-          <li><a href="#">Home</a></li>
-          <li>
-            <a href="#">Strutture</a>
-            <ul class="dropdown">
-              <li><a href="cadamarta.html">Ca da Marta</a></li>
-              <li><a href="gardenhouse.html">Garden House</a></li>
-            </ul>
-          </li>
-          <li><a href="mappa.html">Mappa</a></li>                 
-          <li><a href="prodotto.html">Prodotti</a></li>
-          <li><a href="budget.html">Preventivo</a></li>              
-          <li><a href="contatto.html">Contatti</a></li>   
-        </ul>
-      </nav>
-    </header>
+   <div id="navbar"></div>
+
+  <script>
+    fetch('navbar.html')
+      .then(response => response.text())
+      .then(data => document.getElementById('navbar').innerHTML = data)
+      .catch(error => console.error('Errore nel caricamento della barra di navigazione:', error));
+  </script>
 
     <main class="welcome-section">
       <h1>Benvenuti nel nostro sito!</h1>
