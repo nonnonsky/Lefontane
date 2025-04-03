@@ -24,46 +24,89 @@ function calcolaNotti() {
     }
 }*/
 
-document.addEventListener("DOMContentLoaded", function() {
-    const checkin = document.getElementById("checkin");
-    const checkout = document.getElementById("checkout");
-    const struttura = document.getElementById("struttura");
-    const totaleNottiElem = document.getElementById("totale-notti");
+document.addEventListener("DOMContentLoaded", function () {
+    emailjs.init("pd5BHjNg_hK-eDQGQ");
 
-    function calcolaPrezzo() {
-        if (!checkin.value || !checkout.value || !struttura.value) {
-            totaleNottiElem.textContent = "0 notti";
-            return;
+    const form = document.getElementById("preventivoForm");
+    const checkinInput = document.getElementById("checkin");
+    const checkoutInput = document.getElementById("checkout");
+    const strutturaInput = document.getElementById("struttura");
+    const totaleNottiOutput = document.getElementById("totale-notti");
+
+    function calcolaNotti() {
+        const checkinDate = new Date(checkinInput.value);
+        const checkoutDate = new Date(checkoutInput.value);
+        if (isNaN(checkinDate) || isNaN(checkoutDate) || checkinDate >= checkoutDate) {
+            totaleNottiOutput.textContent = "0 notti";
+            return 0;
         }
-
-        const dataCheckin = new Date(checkin.value);
-        const dataCheckout = new Date(checkout.value);
-        const notti = Math.ceil((dataCheckout - dataCheckin) / (1000 * 60 * 60 * 24));
-
-        if (notti <= 0) {
-            totaleNottiElem.textContent = "0 notti";
-            return;
-        }
-
-        let prezzoPerNotte = 0;
-        const meseCheckin = dataCheckin.getMonth() + 1; // Da 0-11 a 1-12
-
-        if (struttura.value === "garden_house") {
-            if (meseCheckin >= 5 && meseCheckin <= 6) prezzoPerNotte = 100;
-            else if (meseCheckin === 7 || meseCheckin === 9) prezzoPerNotte = 120;
-            else if (meseCheckin === 8) prezzoPerNotte = 160;
-        } else if (struttura.value === "ca_da_marta") {
-            if (meseCheckin >= 5 && meseCheckin <= 6) prezzoPerNotte = 90;
-            else if (meseCheckin === 7 || meseCheckin === 9) prezzoPerNotte = 110;
-            else if (meseCheckin === 8) prezzoPerNotte = 140;
-        }
-
-        const prezzoTotale = notti * prezzoPerNotte;
-        totaleNottiElem.textContent = `${notti} notti - ${prezzoTotale} €`;
-        return { notti, prezzoTotale };
+        const notti = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
+        // Mostra solo il numero di notti sulla pagina
+        totaleNottiOutput.textContent = `${notti} notti`;
+        return notti;
     }
 
-    checkin.addEventListener("change", calcolaPrezzo);
-    checkout.addEventListener("change", calcolaPrezzo);
-    struttura.addEventListener("change", calcolaPrezzo);
+    function calcolaPrezzo(checkinDate, checkoutDate, struttura) {
+        let prezzoTotale = 0;
+        let dataCorrente = new Date(checkinDate);
+
+        while (dataCorrente < checkoutDate) {
+            let mese = dataCorrente.getMonth() + 1;
+            let prezzoNotte = 0;
+
+            if (struttura === "garden_house") {
+                if (mese >= 5 && mese <= 6) prezzoNotte = 100;
+                else if (mese === 7 || mese === 9) prezzoNotte = 120;
+                else if (mese === 8) prezzoNotte = 160;
+            } else if (struttura === "ca_da_marta") {
+                if (mese >= 5 && mese <= 6) prezzoNotte = 90;
+                else if (mese === 7 || mese === 9) prezzoNotte = 110;
+                else if (mese === 8) prezzoNotte = 140;
+            }
+
+            prezzoTotale += prezzoNotte;
+            dataCorrente.setDate(dataCorrente.getDate() + 1);
+        }
+        return prezzoTotale;
+    }
+
+    checkinInput.addEventListener("change", calcolaNotti);
+    checkoutInput.addEventListener("change", calcolaNotti);
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const checkinDate = new Date(checkinInput.value);
+        const checkoutDate = new Date(checkoutInput.value);
+        const struttura = strutturaInput.value;
+        const notti = calcolaNotti();
+        const prezzoTotale = calcolaPrezzo(checkinDate, checkoutDate, struttura);
+
+        const formData = {
+            nome: document.getElementById("nome").value,
+            email: document.getElementById("email").value,
+            telefono: document.getElementById("telefono").value,
+            struttura: struttura,
+            checkin: checkinInput.value,
+            checkout: checkoutInput.value,
+            notti: notti,
+            // Invia il prezzo via email senza mostrarlo sulla pagina
+            prezzo: prezzoTotale.toFixed(2) + " €",
+            adulti: document.getElementById("adulti").value,
+            bambini: document.getElementById("bambini").value,
+            animali: document.getElementById("animali").value,
+            info: document.getElementById("info").value
+        };
+
+        emailjs.send("service_7txlbbc", "template_0fnlqhi", formData)
+            .then(function (response) {
+                console.log("Email inviata con successo!", response);
+                document.getElementById("messaggio-conferma").classList.remove("hidden");
+            })
+            .catch(function (error) {
+                console.error("Errore EmailJS:", error);
+                alert("Errore nell'invio del modulo: " + (error.text || JSON.stringify(error)));
+            });
+    });
 });
+
