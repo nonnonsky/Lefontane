@@ -349,6 +349,10 @@ textarea {
       object-fit: cover; /* Rende le immagini uniformi, adattandole senza distorsioni */
       border-radius: 8px;
     }
+.gallery video {
+  width: 100%;
+  height: auto;
+}
 
 @media (max-width: 768px) {
     .header {
