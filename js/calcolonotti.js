@@ -33,6 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const strutturaInput = document.getElementById("struttura");
     const totaleNottiOutput = document.getElementById("totale-notti");
 
+    checkinInput.addEventListener("change", function () {
+        checkoutInput.min = checkinInput.value;
+        checkoutInput.value = checkinInput.value;
+    });
+
     function calcolaNotti() {
         const checkinDate = new Date(checkinInput.value);
         const checkoutDate = new Date(checkoutInput.value);
@@ -40,11 +45,12 @@ document.addEventListener("DOMContentLoaded", function () {
             totaleNottiOutput.textContent = "0 notti";
             return 0;
         }
-        const notti = Math.ceil((checkoutDate - checkinDate) / (1000 * 60 * 60 * 24));
-        // Mostra solo il numero di notti sulla pagina
+        const notti = Math.ceil((checkoutDate - checkinDate) / (1000 * 3600 * 24));
         totaleNottiOutput.textContent = `${notti} notti`;
         return notti;
     }
+});
+
 
     function calcolaPrezzo(checkinDate, checkoutDate, struttura) {
         let prezzoTotale = 0;
