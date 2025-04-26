@@ -56,12 +56,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (struttura === "garden_house") {
                 if (mese >= 5 && mese <= 6) prezzoNotte = 100;
-                else if (mese === 7 || mese === 9) prezzoNotte = 120;
+                else if (mese === 7 ) prezzoNotte = 120;
                 else if (mese === 8) prezzoNotte = 160;
+               else if (mese === 9) prezzoNotte = 100;
             } else if (struttura === "ca_da_marta") {
                 if (mese >= 5 && mese <= 6) prezzoNotte = 90;
-                else if (mese === 7 || mese === 9) prezzoNotte = 110;
+                else if (mese === 7) prezzoNotte = 110;
                 else if (mese === 8) prezzoNotte = 140;
+                else if (mese === 9) prezzoNotte = 80;
             }
 
             prezzoTotale += prezzoNotte;
